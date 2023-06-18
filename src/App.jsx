@@ -15,7 +15,7 @@ function App() {
   const LayOut = () => {
     return (
       <div className="app">
-        <Header />
+        <Header/>
         <Outlet />
         <Footer/>
       </div>
