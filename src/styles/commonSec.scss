@@ -1,0 +1,13 @@
+.common__section{
+    background:linear-gradient(rgba(0, 0, 0, 0.562),rgba(0, 0, 0, 0.562)), url('../assets/images/slider-10-1.webp') no-repeat ;
+    background-size: cover;
+    background-position: top;
+    padding: 100px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1{
+        color: #fff;
+        font-weight: 600;
+    }
+}

@@ -5,9 +5,9 @@ const ProductsList = ({data}) => {
     return (
         <div className="d-flex justify-content-center flex-wrap">
             {
-                data?.map((item)=>{
+                data?.map((item, i)=>{
                     return(
-                        <ProductCard key={item.id} item={item} />
+                        <ProductCard key={i} item={item} />
                     )
                 })
             }

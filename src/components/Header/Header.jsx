@@ -11,13 +11,17 @@ import { motion } from 'framer-motion'
 import { useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { useSelector } from 'react-redux'
 
 const Header = () => {
     const [show, setShow] = useState(false);
 
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const headerRef = useRef(null)
+
+    const totalQuantity = useSelector(state => state.cart.totalQuantity)
 
     const stickyHeader = () => {
         window.addEventListener('scroll', () => {
@@ -75,14 +79,14 @@ const Header = () => {
                                 <span className="badge">1</span>
                             </motion.span>
                             <motion.span whileTap={{ scale: 1.3 }} className="cart__icon"><BsHandbag />
-                                <span className="badge">1</span>
+                                <span className="badge">{totalQuantity}</span>
                             </motion.span>
                             <motion.img whileTap={{ scale: 1.3 }} src={userIcon} alt="" />
                             <div className="mobile__menu" onClick={handleShow}>
                                 <RiMenu5Line />
                             </div>
                         </div>
-                        <Offcanvas show={show} onHide={handleClose}>
+                        <Offcanvas show={show} onHide={handleClose} placement={'end'}>
                             <Offcanvas.Header closeButton>
                                 <Offcanvas.Title>MultiMart</Offcanvas.Title>
                             </Offcanvas.Header>

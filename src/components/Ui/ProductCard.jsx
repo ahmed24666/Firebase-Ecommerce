@@ -4,7 +4,11 @@ import { motion } from 'framer-motion';
 import './../../styles/productCard.scss'
 import { Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-const ProductCard = ({item}) => {
+import { useDispatch } from 'react-redux'
+import { addItem } from './../../redux/slices/cartSlice'
+
+const ProductCard = ({ item }) => {
+    const dispatch = useDispatch()
     return (
         <Col lg='3' md='4'>
             <div className="product__item">
@@ -21,10 +25,15 @@ const ProductCard = ({item}) => {
                 </Link>
                 <div className="product__card-bottom d-flex justify-content-between p-2 align-items-center">
                     <span className="price">${item.price}</span>
-                    <motion.span whileTap={{ scale: 1.2 }} className='icon'><RiAddLine /></motion.span>
-                </div>
+                    <motion.span whileTap={{ scale: 1.2 }} className='icon' onClick={() => {dispatch(addItem({
+                        id: item.id,
+                        productName: item.productName,
+                        image: item.imgUrl,
+                        price: item.price,
+                    }))}}><RiAddLine /></motion.span>
             </div>
-        </Col>
+            </div>
+        </Col >
     )
 }
 
