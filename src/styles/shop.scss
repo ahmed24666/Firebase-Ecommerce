@@ -1,4 +1,7 @@
 .filter__widget{
+    @media (max-width:768px) {
+        margin-bottom: 15px;
+    }
     select{
         padding: 8px 20px;
         border: 1px solid var(--primary-color);
@@ -6,6 +9,12 @@
         border-radius: 5px;
         background-color: var(--primary-color);
         color: #fff;
+        margin-bottom: 15px;
+        @media (max-width:768px) {
+            padding: 7px 20px;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
         &:focus{
             outline: none !important;
         }

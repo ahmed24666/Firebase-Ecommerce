@@ -6,8 +6,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width:768px) {
+        padding: 70px 0;
+    }
     h1{
         color: #fff;
         font-weight: 600;
+        @media (max-width:768px) {
+            font-size: 1.4rem;
+        }
     }
 }

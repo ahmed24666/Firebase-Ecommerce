@@ -9,12 +9,13 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-
+import ScrollToTop from './components/ScrollToTop'
 function App() {
 
   const LayOut = () => {
     return (
       <div className="app">
+        <ScrollToTop/>
         <Header/>
         <Outlet />
         <Footer/>
