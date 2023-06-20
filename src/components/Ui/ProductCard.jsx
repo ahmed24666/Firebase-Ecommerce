@@ -28,7 +28,7 @@ const ProductCard = ({ item }) => {
                     <motion.span whileTap={{ scale: 1.2 }} className='icon' onClick={() => {dispatch(addItem({
                         id: item.id,
                         productName: item.productName,
-                        image: item.imgUrl,
+                        imgUrl: item.imgUrl,
                         price: item.price,
                     }))}}><RiAddLine /></motion.span>
             </div>

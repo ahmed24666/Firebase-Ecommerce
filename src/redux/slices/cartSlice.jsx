@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify';
 
 const initialState = {
-    cartItems: [{}],
+    cartItems: [],
     totalAmount: 0,
     totalQuantity: 0
 }
@@ -15,12 +15,11 @@ const cartSlice = createSlice({
             const newItem = action.payload
             const existingItem = state.cartItems.find((item) => item.id === newItem.id)
             state.totalQuantity++
-            state.totalAmount = state.cartItems.reduce((total, item) => total + Number(item.price) * Number(item.quantity))
             if (!existingItem) {
                 state.cartItems.push({
                     id: newItem.id,
                     productName: newItem.productName,
-                    image: newItem.imgUrl,
+                    imgUrl: newItem.imgUrl,
                     price: newItem.price,
                     quantity: 1,
                     totalPrice: newItem.price
@@ -30,9 +29,36 @@ const cartSlice = createSlice({
                 existingItem.totalPrice = Number(existingItem.totalPrice) + Number(newItem.price)
             }
             toast.success('Product added successfully')
+            state.totalAmount = state.cartItems.reduce((total, item) => total + Number(item.price) * Number(item.quantity),0)
+
+        },
+        removeItem: (state, action) => {
+            const newItem = action.payload
+            const existingItem = state.cartItems.find((item) => item.id === newItem.id)
+            state.totalQuantity--
+            state.totalAmount =state.totalAmount!==0?state.totalAmount- Number(existingItem.price):state.totalAmount
+            if (existingItem.quantity==1) {
+                state.cartItems=state.cartItems.filter((item)=>item.id!==existingItem.id)
+                toast.error('Product deleted successfully')
+
+            } else {
+                existingItem.quantity--
+                existingItem.totalPrice = Number(existingItem.totalPrice) - Number(newItem.price)
+                toast.info('Product removed successfully')
+            }
+        },
+        deleteItem:(state,action)=>{
+            const id=action.payload
+            const existingItem=state.cartItems.find((item)=>item.id===id)
+            if(existingItem){
+                state.cartItems=state.cartItems.filter((item)=>item.id!==id)
+                state.totalQuantity=state.totalQuantity - existingItem.quantity
+            }
+            state.totalAmount = state.cartItems.reduce((total, item) => total + Number(item.price) * Number(item.quantity),0)
+            toast.error('Product deleted successfully')
         }
     }
 });
 
-export const { addItem } = cartSlice.actions
+export const { addItem ,deleteItem ,removeItem} = cartSlice.actions
 export default cartSlice.reducer

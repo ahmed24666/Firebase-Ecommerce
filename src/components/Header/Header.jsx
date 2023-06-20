@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Container, Row } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import './header.scss'
 import logo from "../../assets/images/eco-logo.png"
 import userIcon from "../../assets/images/user-icon.png"
@@ -32,11 +32,15 @@ const Header = () => {
             }
         })
     }
+
     useEffect(() => {
         stickyHeader()
         return () => window.removeEventListener('scroll', stickyHeader)
     }, [])
-
+    const nevigate=useNavigate()
+    const navigateToCart=()=>{
+        nevigate('/cart')
+    }
 
     const navLinks = [
         {
@@ -78,9 +82,9 @@ const Header = () => {
                             <motion.span whileTap={{ scale: 1.3 }} className="fav__icon"><BsHeart />
                                 <span className="badge">1</span>
                             </motion.span>
-                            <motion.span whileTap={{ scale: 1.3 }} className="cart__icon"><BsHandbag />
-                                <span className="badge">{totalQuantity}</span>
-                            </motion.span>
+                                <motion.span whileTap={{ scale: 1.3 }} className="cart__icon" onClick={navigateToCart}><BsHandbag />
+                                    <span className="badge">{totalQuantity}</span>
+                                </motion.span>
                             <motion.img whileTap={{ scale: 1.3 }} src={userIcon} alt="" />
                             <div className="mobile__menu" onClick={handleShow}>
                                 <RiMenu5Line />

@@ -1,0 +1,39 @@
+.table{
+    img{
+        width: 80px !important;
+        height: 80px !important;
+        object-fit: cover;
+    }
+    .add{
+        span{
+
+            @media (max-width:767px) {
+                display: block;
+            }
+        }
+    }
+    .image{
+        @media (max-width:550px) {
+            display: none;
+        }
+    }
+    .delete{
+        cursor: pointer;
+    }
+    thead{
+        tr{
+            th{
+                color: var(--primary-color);
+                text-align: center;
+            }
+        }
+    }
+    tbody{
+        tr{
+            td{
+                color: var(--primary-color);
+                text-align: center;
+            }
+        }
+    }
+}

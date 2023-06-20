@@ -64,7 +64,7 @@ const ProductDetails = () => {
                                     dispatch(addItem({
                                         id: product.id,
                                         productName: product.productName,
-                                        image: product.imgUrl,
+                                        imgUrl: product.imgUrl,
                                         price: product.price,
                                     }))
                                 }}>
