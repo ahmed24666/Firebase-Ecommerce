@@ -1,0 +1,50 @@
+input{
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid var(--primary-color);
+    margin-bottom: 20px !important;
+    caret-color: var(--primary-color);
+    color: var(--primary-color);
+    &:focus{
+        outline:none;
+    }
+}
+.auth__form{
+    background: var(--primary-color);
+    padding: 40px;
+    border-radius: 5px;
+    input[type='file']{
+        color: #fff;
+        cursor: pointer;
+    }
+    p{
+        margin-top: 30px;
+    }
+    a{
+        color: rgba(255, 255, 255, 0.884) !important;
+    }
+    .auth__btn{
+        background: #fff;
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+}
+button svg {
+    display: inline;
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-left: 0.75rem;
+    color: var(--primary-color) !important;
+    animation: spin_357 1s linear infinite;
+  }
+  
+  @keyframes spin_357 {
+    from {
+      transform: rotate(0deg);
+    }
+  
+    to {
+      transform: rotate(360deg);
+    }
+  }

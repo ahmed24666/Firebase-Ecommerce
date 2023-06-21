@@ -41,19 +41,19 @@ const Cart = () => {
                                                         <td>{item.productName}</td>
                                                         <td>$ {item.price}</td>
                                                         <td className='add'>
-                                                            <span className='fs-5' style={{cursor:'pointer'}} onClick={() => dispatch(removeItem({
+                                                            <span className='fs-5' style={{ cursor: 'pointer' }} onClick={() => dispatch(removeItem({
                                                                 id: item.id,
                                                                 productName: item.productName,
                                                                 imgUrl: item.imgUrl,
                                                                 price: item.price,
-                                                            }))}><AiOutlineMinusCircle/> </span>
-                                                             {item.quantity}px 
-                                                            <span className='fs-5 ' style={{cursor:'pointer'}} onClick={() => dispatch(addItem({
+                                                            }))}><AiOutlineMinusCircle /> </span>
+                                                            {item.quantity}px
+                                                            <span className='fs-5 ' style={{ cursor: 'pointer' }} onClick={() => dispatch(addItem({
                                                                 id: item.id,
                                                                 productName: item.productName,
                                                                 imgUrl: item.imgUrl,
                                                                 price: item.price,
-                                                            }))}> <AiOutlinePlusCircle/></span>
+                                                            }))}> <AiOutlinePlusCircle /></span>
                                                         </td>
                                                         <motion.td whileTap={{ color: 'red' }} className='delete fs-4' onClick={() => dispatch(deleteItem(item.id))}><AiOutlineDelete /></motion.td>
                                                     </tr>
@@ -68,7 +68,7 @@ const Cart = () => {
                     <Col lg='3'>
                         <div>
                             <h6 className='d-flex align-items-center justify-content-evenly justify-content-lg-between'>Subtotal
-                            <span className='fs-4 fw-bold'>$ {totalAmount}</span>
+                                <span className='fs-4 fw-bold'>$ {totalAmount}</span>
                             </h6>
                         </div>
                         <p className='fs-6 mt-2 text-center text-lg-start'>taxes and shipping will be calculated in the checkout</p>
@@ -76,9 +76,11 @@ const Cart = () => {
                             <button className="buy__btn w-100">
                                 <Link to='/shop'>Continue Shopping</Link>
                             </button>
-                            <button className="buy__btn w-100 mt-3">
-                                <Link to='/checkout'>Checkout</Link>
-                            </button>
+                            <Link to='/checkout'>
+                                <button className="buy__btn w-100 mt-3">
+                                    Checkout
+                                </button>
+                            </Link>
                         </div>
                     </Col>
                 </Row>
