@@ -13,8 +13,8 @@ import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useSelector } from 'react-redux'
 import useAuth from '../../custom-hook/useAuth'
-import {signOut} from 'firebase/auth'
-import {auth} from '../../firebase.config'
+import { signOut } from 'firebase/auth'
+import { auth } from '../../firebase.config'
 import { toast } from 'react-toastify'
 const Header = () => {
     const nevigate = useNavigate()
@@ -39,11 +39,11 @@ const Header = () => {
         })
     }
 
-    const logOut=()=>{
-        signOut(auth).then(()=>{
+    const logOut = () => {
+        signOut(auth).then(() => {
             toast.success('Logged Out')
             nevigate('/')
-        }).catch(err=>{
+        }).catch(err => {
             toast.error(err.message)
         })
     }
@@ -99,21 +99,29 @@ const Header = () => {
                                 <span className="badge">{totalQuantity}</span>
                             </motion.span>
                             <div className='profie'>
-                                <motion.img onClick={()=>setprofileActions(!profileActions)} whileTap={{ scale: 1.3 }} src={currentUser ? currentUser.photoURL : userIcon} alt="" />
-                                <div className={profileActions?"profile__actions show__profileActions":"profile__actions"}>
+                                <motion.img onClick={() => setprofileActions(!profileActions)} whileTap={{ scale: 1.3 }} src={currentUser ? currentUser.photoURL : userIcon} alt="" />
+                                <div className={profileActions ? "profile__actions show__profileActions" : "profile__actions"}>
                                     {
-                                        currentUser?<span className='fs-5' onClick={()=>{setprofileActions(!profileActions);logOut()}}>
-                                            <p className=''>{currentUser.displayName}</p>
-                                            Logout
-                                            </span>:
-                                        <div className='d-flex justify-content-center align-items-center flex-column fs-4'>
-                                            <Link to='/signup'>
-                                                Signup
-                                            </Link>
-                                            <Link to='/login'>
-                                                Login
-                                            </Link>
-                                        </div>
+                                        currentUser ?
+                                            <span className='fs-5 text-center' >
+                                                <p className='mb-0'>{currentUser.displayName}</p>
+                                                <div onClick={() => { setprofileActions(!profileActions); logOut() }}>
+                                                    Logout
+                                                </div>
+                                                <div className='py-1'>
+                                                    <Link to='/dashboard' >
+                                                        Dashboard
+                                                    </Link>
+                                                </div>
+                                            </span> :
+                                            <div className='d-flex justify-content-center align-items-center flex-column fs-5'>
+                                                <Link to='/signup' className='py-1'>
+                                                    Signup
+                                                </Link>
+                                                <Link to='/login' className='py-1'>
+                                                    Login
+                                                </Link>
+                                            </div>
                                     }
                                 </div>
                             </div>

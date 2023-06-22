@@ -11,6 +11,10 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ScrollToTop from './components/ScrollToTop'
 import ProtectedRoutes from "./custom-hook/ProtectedRoutes";
+import AdminNav from "./admin/AdminNav";
+import AllProducts from "./admin/AllProducts";
+import AddProducts from "./admin/AddProducts";
+import Dashboard from "./admin/Dashboard";
 function App() {
 
   const LayOut = () => {
@@ -18,6 +22,16 @@ function App() {
       <div className="app">
         <ScrollToTop/>
         <Header/>
+        <Outlet />
+        <Footer/>
+      </div>
+    )
+  }
+  const AdminPanelLayout = () => {
+    return (
+      <div className="app">
+        <ScrollToTop/>
+        <AdminNav/>
         <Outlet />
         <Footer/>
       </div>
@@ -60,11 +74,29 @@ function App() {
 
       ]
     },
+    {
+      path: "/dashboard",
+      element: <AdminPanelLayout/>,
+      children: [
+        {
+          path: "/dashboard",
+          element:<ProtectedRoutes><Dashboard/></ProtectedRoutes> ,
+        },
+        {
+          path: "/dashboard/all-products",
+          element:<ProtectedRoutes><AllProducts/></ProtectedRoutes> ,
+        },
+        {
+          path: "/dashboard/add-products",
+          element: <ProtectedRoutes><AddProducts/></ProtectedRoutes>,
+        },
+      ]
+    },
   ]);
 
   return (
     <div>
-      <RouterProvider router={router} />
+      <RouterProvider fallbackElement={<p>Loading...</p>} router={router} />
     </div>
   );
 }
