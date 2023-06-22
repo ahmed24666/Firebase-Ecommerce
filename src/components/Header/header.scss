@@ -2,6 +2,27 @@ header{
     width: 100%;
     height: 70px;
     line-height: 70px;
+    .profie{
+        position: relative;
+        z-index: 9;
+        .profile__actions{
+            position: absolute;
+            top: 98%;
+            left: -125px;
+            width: 150px;
+            z-index: 10;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            background-color: var(--card-bg-01);
+            line-height: 30px;
+            display: none;
+        }
+    }
+    .show__profileActions{
+        display: block  !important; 
+    }
     a.active{
         font-weight: 700 !important;
     }

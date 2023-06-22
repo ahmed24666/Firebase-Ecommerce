@@ -40,7 +40,7 @@ const Signup = () => {
             });
             setloading(false)
             toast.success('Account Created')
-            navigate('/login')
+            navigate('/')
             // // const storageRef = firebase.storage().ref('rainbow_photos/' + username);
             // const uploadTask = uploadBytesResumable(storageRef, file)
             // uploadTask.on((error) => {

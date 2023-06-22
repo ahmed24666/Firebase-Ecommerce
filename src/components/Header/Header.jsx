@@ -12,17 +12,23 @@ import { useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useSelector } from 'react-redux'
-
+import useAuth from '../../custom-hook/useAuth'
+import {signOut} from 'firebase/auth'
+import {auth} from '../../firebase.config'
+import { toast } from 'react-toastify'
 const Header = () => {
+    const nevigate = useNavigate()
+
     const [show, setShow] = useState(false);
-
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const headerRef = useRef(null)
 
+    const { currentUser } = useAuth()
+
     const totalQuantity = useSelector(state => state.cart.totalQuantity)
 
+    const [profileActions, setprofileActions] = useState(false)
     const stickyHeader = () => {
         window.addEventListener('scroll', () => {
             if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
@@ -33,12 +39,19 @@ const Header = () => {
         })
     }
 
+    const logOut=()=>{
+        signOut(auth).then(()=>{
+            toast.success('Logged Out')
+            nevigate('/')
+        }).catch(err=>{
+            toast.error(err.message)
+        })
+    }
     useEffect(() => {
         stickyHeader()
         return () => window.removeEventListener('scroll', stickyHeader)
     }, [])
-    const nevigate=useNavigate()
-    const navigateToCart=()=>{
+    const navigateToCart = () => {
         nevigate('/cart')
     }
 
@@ -82,10 +95,28 @@ const Header = () => {
                             <motion.span whileTap={{ scale: 1.3 }} className="fav__icon"><BsHeart />
                                 <span className="badge">1</span>
                             </motion.span>
-                                <motion.span whileTap={{ scale: 1.3 }} className="cart__icon" onClick={navigateToCart}><BsHandbag />
-                                    <span className="badge">{totalQuantity}</span>
-                                </motion.span>
-                            <motion.img whileTap={{ scale: 1.3 }} src={userIcon} alt="" />
+                            <motion.span whileTap={{ scale: 1.3 }} className="cart__icon" onClick={navigateToCart}><BsHandbag />
+                                <span className="badge">{totalQuantity}</span>
+                            </motion.span>
+                            <div className='profie'>
+                                <motion.img onClick={()=>setprofileActions(!profileActions)} whileTap={{ scale: 1.3 }} src={currentUser ? currentUser.photoURL : userIcon} alt="" />
+                                <div className={profileActions?"profile__actions show__profileActions":"profile__actions"}>
+                                    {
+                                        currentUser?<span className='fs-5' onClick={()=>{setprofileActions(!profileActions);logOut()}}>
+                                            <p className=''>{currentUser.displayName}</p>
+                                            Logout
+                                            </span>:
+                                        <div className='d-flex justify-content-center align-items-center flex-column fs-4'>
+                                            <Link to='/signup'>
+                                                Signup
+                                            </Link>
+                                            <Link to='/login'>
+                                                Login
+                                            </Link>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
                             <div className="mobile__menu" onClick={handleShow}>
                                 <RiMenu5Line />
                             </div>

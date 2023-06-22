@@ -10,6 +10,7 @@ import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ScrollToTop from './components/ScrollToTop'
+import ProtectedRoutes from "./custom-hook/ProtectedRoutes";
 function App() {
 
   const LayOut = () => {
@@ -46,7 +47,7 @@ function App() {
         },
         {
           path: "/checkout",
-          element: <Checkout />,
+          element: <ProtectedRoutes><Checkout /></ProtectedRoutes>,
         },
         {
           path: "/login",
