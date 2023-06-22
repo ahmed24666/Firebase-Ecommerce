@@ -6,6 +6,7 @@ import { storage, db } from './../firebase.config'
 import { ref, uploadBytesResumable, getDownloadURL } from '@firebase/storage'
 import { collection, addDoc } from '@firebase/firestore'
 import { uploadBytes } from 'firebase/storage'
+import { useNavigate } from 'react-router'
 
 const AddProducts = () => {
     const [entertitle, setentertitle] = useState('')
@@ -15,7 +16,7 @@ const AddProducts = () => {
     const [enterPrice, setenterPrice] = useState('')
     const [enterProductImg, setenterProductImg] = useState(null)
     const [loading, setloading] = useState(false)
-
+    const navigate=useNavigate()
     const addProduct = async (e) => {
         e.preventDefault()
         setloading(true)
@@ -46,6 +47,7 @@ const AddProducts = () => {
             });
             toast.success('Product successfully added !!')
             setloading(false)
+            navigate('/dashboard/all-products')
         } catch (error) {
             toast.error('Something went wrong')
             setloading(false)
