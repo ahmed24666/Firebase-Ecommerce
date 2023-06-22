@@ -15,6 +15,7 @@ import AdminNav from "./admin/AdminNav";
 import AllProducts from "./admin/AllProducts";
 import AddProducts from "./admin/AddProducts";
 import Dashboard from "./admin/Dashboard";
+import Users from "./admin/Users";
 function App() {
 
   const LayOut = () => {
@@ -89,6 +90,10 @@ function App() {
         {
           path: "/dashboard/add-products",
           element: <ProtectedRoutes><AddProducts/></ProtectedRoutes>,
+        },
+        {
+          path: "/dashboard/users",
+          element: <ProtectedRoutes><Users/></ProtectedRoutes>,
         },
       ]
     },

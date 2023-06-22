@@ -43,7 +43,7 @@ const AdminNav = () => {
                         <div className="admin__nav-top-right">
                             <span><RiNotification3Line/></span>
                             <span><RiSettings2Line/></span>
-                            <img src={currentUser.photoURL} alt="" />
+                            <img src={currentUser&&currentUser.photoURL} alt="" />
                         </div>
                     </div>
                 </Container>
