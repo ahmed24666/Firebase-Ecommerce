@@ -1,10 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify';
 
+const itemss=localStorage.getItem('cartItems')!==null?JSON.parse(localStorage.getItem('cartItems')):[]
+const totalAmount=localStorage.getItem('totalAmount')!==null?JSON.parse(localStorage.getItem('totalAmount')):0
+const totalQuantity=localStorage.getItem('totalQuantity')!==null?JSON.parse(localStorage.getItem('totalQuantity')):0
+
 const initialState = {
-    cartItems: [],
-    totalAmount: 0,
-    totalQuantity: 0
+    cartItems: itemss,
+    totalAmount: totalAmount,
+    totalQuantity: totalQuantity
 }
 
 const cartSlice = createSlice({
@@ -31,6 +35,9 @@ const cartSlice = createSlice({
             toast.success('Product added successfully')
             state.totalAmount = state.cartItems.reduce((total, item) => total + Number(item.price) * Number(item.quantity),0)
 
+            localStorage.setItem('cartItems' ,JSON.stringify(state.cartItems.map(item=>item)))
+            localStorage.setItem('totalAmount' ,JSON.stringify(state.totalAmount))
+            localStorage.setItem('totalQuantity' ,JSON.stringify(state.totalQuantity))
         },
         removeItem: (state, action) => {
             const newItem = action.payload
@@ -46,6 +53,10 @@ const cartSlice = createSlice({
                 existingItem.totalPrice = Number(existingItem.totalPrice) - Number(newItem.price)
                 toast.info('Product removed successfully')
             }
+
+            localStorage.setItem('cartItems' ,JSON.stringify(state.cartItems.map(item=>item)))
+            localStorage.setItem('totalAmount' ,JSON.stringify(state.totalAmount))
+            localStorage.setItem('totalQuantity' ,JSON.stringify(state.totalQuantity))
         },
         deleteItem:(state,action)=>{
             const id=action.payload
@@ -56,6 +67,10 @@ const cartSlice = createSlice({
             }
             state.totalAmount = state.cartItems.reduce((total, item) => total + Number(item.price) * Number(item.quantity),0)
             toast.error('Product deleted successfully')
+
+            localStorage.setItem('cartItems' ,JSON.stringify(state.cartItems.map(item=>item)))
+            localStorage.setItem('totalAmount' ,JSON.stringify(state.totalAmount))
+            localStorage.setItem('totalQuantity' ,JSON.stringify(state.totalQuantity))
         }
     }
 });
