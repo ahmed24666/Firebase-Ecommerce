@@ -46,7 +46,7 @@ const AllProducts = () => {
                                             return (
                                                 <tr key={item.id}>
                                                     <td><img src={item.imgUrl} alt="" /></td>
-                                                    <td >{item.title}</td>
+                                                    <td >{item.productName}</td>
                                                     <td>{item.category}</td>
                                                     <td>$ {item.price}</td>
                                                     <td><button className="btn btn-danger" onClick={() => deleteProduct(item.id)}>Delete</button></td>

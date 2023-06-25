@@ -7,7 +7,7 @@ const Clock = () => {
     const [seconds, setSeconds] = useState()
     let interval;
     const countDown=()=>{
-        const distination =new Date('Oct 14, 2023').getTime()
+        const distination =new Date('Oct 14, 2025').getTime()
         interval=setInterval(()=>{
             const now =new Date().getTime()
             const different=distination - now

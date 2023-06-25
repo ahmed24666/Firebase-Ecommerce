@@ -8,28 +8,33 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Services from './../components/services/Services'
 import ProductsList from '../components/Ui/ProductsList'
-import products from '../assets/data/products'
 import Clock from '../components/Ui/clock'
 import { useEffect } from 'react'
+import useGetData from '../custom-hook/useGetData'
+
 const Home = () => {
+    const { data: products, dataLoading: productsLoading } = useGetData('products')
+    const { data: users, dataLoading: usersLoading } = useGetData('users')
+
     const [trendingProducts, setTrendingProducts] = useState([])
     const [bestSellerProducts, setBestSellerProducts] = useState([])
     const [mobileProducts, setMobileProducts] = useState([])
     const [wirelessProducts, setWirelessProducts] = useState([])
     const [popularProducts, setPopularProducts] = useState([])
     useEffect(() => {
-        const filteredTrendingProducts=products.filter((item)=>item.category==='chair')
-        const filteredBestSellerProducts=products.filter((item)=>item.category==='sofa')
-        const filteredMobileProducts=products.filter((item)=>item.category==='mobile')
-        const filteredWirelessProducts=products.filter((item)=>item.category==='wireless')
-        const filteredPopularProducts=products.filter((item)=>item.category==='watch')
+        const filteredTrendingProducts = products.filter((item) => item.category === 'chair')
+        const filteredBestSellerProducts = products.filter((item) => item.category === 'sofa')
+        const filteredMobileProducts = products.filter((item) => item.category === 'mobile')
+        const filteredWirelessProducts = products.filter((item) => item.category === 'wireless')
+        const filteredPopularProducts = products.filter((item) => item.category === 'watch')
         setTrendingProducts(filteredTrendingProducts)
         setBestSellerProducts(filteredBestSellerProducts)
         setMobileProducts(filteredMobileProducts)
         setWirelessProducts(filteredWirelessProducts)
         setPopularProducts(filteredPopularProducts)
-    }, [])
-    const year=new Date().getFullYear()
+    }, [products])
+    const year = new Date().getFullYear()
+
     return <Helmet title={'Home'}>
         <section className='hero__section'>
             <Container>
@@ -41,9 +46,9 @@ const Home = () => {
                             </p>
                             <h2>Make Your Interior More Minimalistic & Modern</h2>
                             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore, quasi! Quos maiores aliquid vero incidunt dolorem obcaecati accusantium fugiat inventore.</p>
-                            <motion.button whileTap={{scale:1.2}} className="buy__btn">
+                            <motion.button whileTap={{ scale: 1.2 }} className="buy__btn">
                                 <Link to='/shop'>
-                                SHOP NOW
+                                    SHOP NOW
                                 </Link>
                             </motion.button>
                         </div>
@@ -56,7 +61,7 @@ const Home = () => {
                 </Row>
             </Container>
         </section>
-        <Services/>
+        <Services />
 
         <section className="trending__products">
             <Container>
@@ -64,7 +69,14 @@ const Home = () => {
                     <Col lg='12' className='text-center mb-5' >
                         <h2 className='section__title'>Trending Products</h2>
                     </Col>
-                    <ProductsList data={trendingProducts}/>
+                    {
+                        productsLoading ?
+                            <div className='d-flex justify-content-center align-items-center'>
+                                <div class="chaotic-orbit"></div>
+                            </div>
+                            :
+                            <ProductsList data={trendingProducts} />
+                    }
                 </Row>
             </Container>
         </section>
@@ -74,7 +86,14 @@ const Home = () => {
                     <Col lg='12' className='text-center mb-5' >
                         <h2 className='section__title'>Best Seller</h2>
                     </Col>
-                    <ProductsList data={bestSellerProducts}/>
+                    {
+                        productsLoading ?
+                            <div className='d-flex justify-content-center align-items-center'>
+                                <div class="chaotic-orbit"></div>
+                            </div>
+                            :
+                    <ProductsList data={bestSellerProducts} />
+                    }
                 </Row>
             </Container>
         </section>
@@ -86,8 +105,8 @@ const Home = () => {
                             <h4 className='text-white fs-6 mb-2'>Limited Offers</h4>
                             <h3 className='text-white fs-5 mb-3'>Quality Armchair</h3>
                         </div>
-                        <Clock/>
-                        <motion.button whileTap={{scale:1.2}} className="buy__btn store__btn"><Link to='/shop'>Visit store</Link></motion.button>
+                        <Clock />
+                        <motion.button whileTap={{ scale: 1.2 }} className="buy__btn store__btn"><Link to='/shop'>Visit store</Link></motion.button>
                     </Col>
                     <Col lg='6' md='6' className='text-md-end text-center '>
                         <img src={counterImg} alt="" />
@@ -101,18 +120,31 @@ const Home = () => {
                     <Col lg='12' className='text-center mb-5'>
                         <h2 className="section__title">New Arrivals</h2>
                     </Col>
-                    <ProductsList data={mobileProducts}/>
-                    {/* <ProductsList data={wirelessProducts}/> */}
+                    {
+                        productsLoading ?
+                            <div className='d-flex justify-content-center align-items-center'>
+                                <div class="chaotic-orbit"></div>
+                            </div>
+                            :
+                    <ProductsList data={mobileProducts} />
+                    }
                 </Row>
             </Container>
         </section>
         <section className="popular__category">
-        <Container >
+            <Container >
                 <Row>
                     <Col lg='12' className='text-center mb-5'>
                         <h2 className="section__title">Popular in Category</h2>
                     </Col>
-                    <ProductsList data={popularProducts}/>
+                    {
+                        productsLoading ?
+                            <div className='d-flex justify-content-center align-items-center'>
+                                <div class="chaotic-orbit"></div>
+                            </div>
+                            :
+                    <ProductsList data={popularProducts} />
+                    }
                 </Row>
             </Container>
         </section>

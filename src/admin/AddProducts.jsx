@@ -38,7 +38,7 @@ const AddProducts = () => {
             toast.success('Image Upload');
             const downloadURL = await getDownloadURL(storageRef);
             await addDoc(docRef, {
-                title: entertitle,
+                productName: entertitle,
                 shortDesc: enterShortdesc,
                 description: enterDescription,
                 category: enterCategory,
@@ -83,6 +83,7 @@ const AddProducts = () => {
                                 <FormGroup className='form__group text-center text-md-center d-flex justify-content-center flex-column w-50 '>
                                     <span >Category</span>
                                     <select className='p-2 bg-transparent' onChange={(e) => setenterCategory(e.target.value)} required >
+                                        <option>Select Category</option>
                                         <option className='text-capitalize' value="chair">chair</option>
                                         <option className='text-capitalize' value="sofa">sofa</option>
                                         <option className='text-capitalize' value="mobile">mobile</option>

@@ -19,7 +19,7 @@ root.render(
         theme="dark"
       />
       <App />
-    </Provider>
+        </Provider>
   </React.StrictMode>
 );
 

@@ -5,11 +5,9 @@ import './header.scss'
 import logo from "../../assets/images/eco-logo.png"
 import userIcon from "../../assets/images/user-icon.png"
 import { BsHandbag } from 'react-icons/bs';
-import { BsHeart } from 'react-icons/bs';
 import { RiMenu5Line } from 'react-icons/ri';
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
-import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useSelector } from 'react-redux'
 import useAuth from '../../custom-hook/useAuth'
@@ -22,8 +20,7 @@ const Header = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const headerRef = useRef(null)
-
+    const [scroll, setscroll] = useState(false)
     const { currentUser } = useAuth()
 
     const totalQuantity = useSelector(state => state.cart.totalQuantity)
@@ -32,9 +29,9 @@ const Header = () => {
     const stickyHeader = () => {
         window.addEventListener('scroll', () => {
             if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-                headerRef.current.classList.add('sticky__header')
+                setscroll(true)
             } else {
-                headerRef.current.classList.remove('sticky__header')
+                setscroll(false)
             }
         })
     }
@@ -49,7 +46,6 @@ const Header = () => {
     }
     useEffect(() => {
         stickyHeader()
-        return () => window.removeEventListener('scroll', stickyHeader)
     }, [])
     const navigateToCart = () => {
         nevigate('/cart')
@@ -70,7 +66,7 @@ const Header = () => {
         },
     ]
     return (
-        <header ref={headerRef}>
+        <header className={scroll?'sticky__header':''}>
             <Container>
                 <Row>
                     <div className="nav__wrapper">
@@ -92,9 +88,7 @@ const Header = () => {
                             </ul>
                         </div>
                         <div className="nav__icons">
-                            <motion.span whileTap={{ scale: 1.3 }} className="fav__icon"><BsHeart />
-                                <span className="badge">1</span>
-                            </motion.span>
+                            
                             <motion.span whileTap={{ scale: 1.3 }} className="cart__icon" onClick={navigateToCart}><BsHandbag />
                                 <span className="badge">{totalQuantity}</span>
                             </motion.span>

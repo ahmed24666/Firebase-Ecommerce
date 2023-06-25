@@ -5,7 +5,7 @@ import {db} from '../firebase.config'
 const useGetData = collectionName => {
     const [data, setdata] = useState([])
     const collectionRef=collection(db,collectionName)
-    const [dataLoading, setdataLoading] = useState(false)
+    const [dataLoading, setdataLoading] = useState(true)
 
     useEffect(() => {
         setdataLoading(true)

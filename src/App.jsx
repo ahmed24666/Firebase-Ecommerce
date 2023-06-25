@@ -16,25 +16,44 @@ import AllProducts from "./admin/AllProducts";
 import AddProducts from "./admin/AddProducts";
 import Dashboard from "./admin/Dashboard";
 import Users from "./admin/Users";
+import Loader from "./components/loader/Loader";
+import useGetData from "./custom-hook/useGetData";
 function App() {
+  const { dataLoading } = useGetData('products')
 
   const LayOut = () => {
     return (
       <div className="app">
-        <ScrollToTop/>
-        <Header/>
-        <Outlet />
-        <Footer/>
+        {
+          dataLoading ?
+            <Loader />
+            :
+            (
+              <>
+                <ScrollToTop />
+                <Header />
+                <Outlet />
+                <Footer />
+              </>
+            )
+        }
       </div>
     )
   }
   const AdminPanelLayout = () => {
     return (
       <div className="app">
-        <ScrollToTop/>
-        <AdminNav/>
-        <Outlet />
-        <Footer/>
+        {
+          dataLoading ?
+            <Loader />
+            :
+            <>
+              <ScrollToTop />
+              <AdminNav />
+              <Outlet />
+              <Footer />
+            </>
+        }
       </div>
     )
   }
@@ -52,6 +71,7 @@ function App() {
           path: "/shop",
           element: <Shop />,
         },
+
         {
           path: "/shop/:Id",
           element: <ProductDetails />,
@@ -77,23 +97,23 @@ function App() {
     },
     {
       path: "/dashboard",
-      element: <AdminPanelLayout/>,
+      element: <AdminPanelLayout />,
       children: [
         {
           path: "/dashboard",
-          element:<ProtectedRoutes><Dashboard/></ProtectedRoutes> ,
+          element: <ProtectedRoutes><Dashboard /></ProtectedRoutes>,
         },
         {
           path: "/dashboard/all-products",
-          element:<ProtectedRoutes><AllProducts/></ProtectedRoutes> ,
+          element: <ProtectedRoutes><AllProducts /></ProtectedRoutes>,
         },
         {
           path: "/dashboard/add-products",
-          element: <ProtectedRoutes><AddProducts/></ProtectedRoutes>,
+          element: <ProtectedRoutes><AddProducts /></ProtectedRoutes>,
         },
         {
           path: "/dashboard/users",
-          element: <ProtectedRoutes><Users/></ProtectedRoutes>,
+          element: <ProtectedRoutes><Users /></ProtectedRoutes>,
         },
       ]
     },

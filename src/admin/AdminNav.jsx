@@ -3,7 +3,7 @@ import { Container, Row } from 'react-bootstrap'
 import { RiSearch2Line } from 'react-icons/ri';
 import { RiNotification3Line } from 'react-icons/ri';
 import { RiSettings2Line } from 'react-icons/ri';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import useAuth from "./../custom-hook/useAuth";
 import './../styles/admin-nav.scss'
 import { motion } from 'framer-motion';
@@ -17,8 +17,8 @@ const admin__nav=[
         path:'/dashboard/all-products'
     },
     {
-        display:'Orders',
-        path:'/dashboard/orders'
+        display:'Add Products',
+        path:'/dashboard/add-products'
     },
     {
         display:'Users',
@@ -34,7 +34,9 @@ const AdminNav = () => {
                 <Container>
                     <div className="admin__nav-wrapper-top flex-column flex-md-row gap-md-5 gap-3 ">
                         <div className="logo text-white">
+                            <Link to='/'>
                             <h2 className='fs-3'>Multimart</h2>
+                            </Link>
                         </div>
                         <div className="admin-search-box">
                             <input type="text" placeholder='Search....' />
