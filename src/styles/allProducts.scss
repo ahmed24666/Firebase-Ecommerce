@@ -148,5 +148,15 @@
      opacity: 0.65;
     }
    }
+   .thimg{
+    @media (max-width:450px) {
+        display: none;
+    }
+   }
+   .thprice{
+    @media (max-width:350px) {
+        display: none;
+    }
+   }
    
    

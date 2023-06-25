@@ -27,10 +27,10 @@ const AllProducts = () => {
                             <table className='table'>
                                 <thead>
                                     <tr>
-                                        <th>Image</th>
+                                        <th className='thimg'>Image</th>
                                         <th>Title</th>
                                         <th>Category</th>
-                                        <th>Price</th>
+                                        <th className='thprice'>Price</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -45,10 +45,10 @@ const AllProducts = () => {
                                         productsData.map((item) => {
                                             return (
                                                 <tr key={item.id}>
-                                                    <td><img src={item.imgUrl} alt="" /></td>
+                                                    <td className='thimg'><img src={item.imgUrl} alt="" /></td>
                                                     <td >{item.productName}</td>
                                                     <td>{item.category}</td>
-                                                    <td>$ {item.price}</td>
+                                                    <td className='thprice'>$ {item.price}</td>
                                                     <td><button className="btn btn-danger" onClick={() => deleteProduct(item.id)}>Delete</button></td>
                                                 </tr>
                                             )

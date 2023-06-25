@@ -11,20 +11,20 @@ const Dashboard = () => {
             <section>
                 <Container>
                     <Row>
-                        <Col className="lg-3">
-                            <div className="revenue__box">
+                        <Col lg='3' md='6'>
+                            <div className="text-center text-md-start revenue__box mb-3">
                                 <h5>Total Sales</h5>
                                 <span>$7890</span>
                             </div>
                         </Col>
-                        <Col className="lg-3">
-                            <div className="order__box">
+                        <Col lg='3' md='6'>
+                            <div className="text-center text-md-start order__box mb-3">
                                 <h5>Orders</h5>
                                 <span>789</span>
                             </div>
                         </Col>
-                        <Col className="lg-3">
-                            <div className="products__box">
+                        <Col lg='3' md='6'>
+                            <div className="text-center text-md-start products__box mb-3">
                                 <h5>Total Produts</h5>
                                 <span>
                                     {productsLoading ? 
@@ -36,8 +36,8 @@ const Dashboard = () => {
                                     </span> : products.length}</span>
                             </div>
                         </Col>
-                        <Col className="lg-3">
-                            <div className="users__box">
+                        <Col lg='3' md='6'>
+                            <div className="text-center text-md-start users__box mb-3">
                                 <h5>Total Users</h5>
                                 <span>{usersLoading ? 
                                     <span className='loader'>

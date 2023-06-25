@@ -32,7 +32,7 @@ const Users = () => {
                                     <tr>
                                         <th>Image</th>
                                         <th>Username</th>
-                                        <th>Email</th>
+                                        <th className='thimg'>Email</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -43,7 +43,7 @@ const Users = () => {
                                                 <tr key={item.uid}>
                                                     <td><img src={item.photoURL} alt="" /></td>
                                                     <td >{item.displayName}</td>
-                                                    <td>{item.email}</td>
+                                                    <td className='thimg'>{item.email}</td>
                                                     <td><button className="btn btn-danger" onClick={() => deleteUser(item.uid)}>Delete</button></td>
                                                 </tr>
                                             )
